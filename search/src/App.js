@@ -47,14 +47,17 @@ class App extends Component {
     }
 
     try {
-      const token = window.localStorage.getItem('token')
-      if (token) {
-        settings['authToken'] = token
-      }
-
       this.client = new Client(settings)
 
-      await this.client.init()
+      this.client.onSignIn(function (userId) {
+        console.log('onSignIn', userId)
+      })
+      // Register an events to be notifed when users sign out of Masq
+      this.client.onSignOut(function () {
+        console.log('onSignOut')
+      })
+
+      await this.client.init(appInfo)
 
       this.setState({ isConnected: true })
 
@@ -67,12 +70,6 @@ class App extends Component {
       this.client.ws.onclose(() => {
         this.setState({ isConnected: false })
       })
-
-      if (!token) {
-        // Register the app and save the returned token
-        const token = await this.client.addApp(appInfo)
-        window.localStorage.setItem('token', token)
-      }
 
       // Get Search history
       const keys = (await this.client.listKeys())
