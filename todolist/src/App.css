@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.Item {
+  margin: auto;
+  margin-bottom: 8px;
+  width: 630px;
+}
+
+.Item .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Trash {
+  cursor: pointer;
+}
