@@ -116,7 +116,7 @@ class App extends Component {
   }
 
   render () {
-    const { item, items } = this.state
+    const { item, items, logged } = this.state
 
     return (
       <div className='App'>
@@ -152,6 +152,7 @@ class App extends Component {
             className='uk-button uk-form-width-small uk-button-primary'
             type='submit'
             onSubmit={this.handleSubmit}
+            disabled={!logged}
           >Add task
           </button>
         </form>
