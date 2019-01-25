@@ -108,7 +108,10 @@ class App extends Component {
   }
 
   renderConnectionStatus () {
-    const label = this.state.logged ? 'Connected' : 'Not connected'
+    const username = window.sessionStorage.getItem('username')
+    console.log(username)
+
+    const label = this.state.logged ? `You are connected ${username}` : 'Not connected'
     const status = this.state.logged ? 'success' : 'warning'
     return (
       <div><span className={`uk-label uk-label-${status}`}>{label}</span></div>
