@@ -65,11 +65,23 @@ class App extends Component {
   async handleClickConnect () {
     const { link } = this.state
     if (!link) return
-
     window.open(link, '_blank')
-    await this.masq.logIntoMasq(this.state.stayConnected)
-    this.setState({ logged: true })
-    await this.fetchTasksFromDB()
+    for (let i = 0; i < 3; i++) {
+      try {
+        await this.masq.logIntoMasq(this.state.stayConnected)
+        // if no error catched but initial step not passed, try again
+        if (this.initialStepPassed) {
+          this.setState({ logged: true })
+          await this.fetchTasksFromDB()
+          break
+        }
+      } catch (error) {
+        // if error try again
+        console.log('catch it', error.type)
+        if (error.type === 'Masq access refused by the user') { break }
+      }
+    }
+    console.log('outisde for')
   }
 
   async handleClickLogout () {
