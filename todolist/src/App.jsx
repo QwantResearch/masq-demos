@@ -15,6 +15,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.masq = null
+    this.masqPopupWindow = null
     this.state = { items: {}, item: '', link: null, logged: false }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -66,7 +67,13 @@ class App extends Component {
     const { link } = this.state
     if (!link) return
 
-    window.open(link, 'masq', 'height=700, width=500')
+    if (this.masqPopupWindow) {
+      // close previous popup if any
+      this.masqPopupWindow.close()
+    }
+
+    this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500')
+
     await this.masq.logIntoMasq(this.state.stayConnected)
     this.setState({ logged: true })
     await this.fetchTasksFromDB()
