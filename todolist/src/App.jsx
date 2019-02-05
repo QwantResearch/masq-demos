@@ -66,7 +66,7 @@ class App extends Component {
     const { link } = this.state
     if (!link) return
 
-    window.open(link, '_blank')
+    window.open(link, 'masq', 'height=700, width=500')
     await this.masq.logIntoMasq(this.state.stayConnected)
     this.setState({ logged: true })
     await this.fetchTasksFromDB()
