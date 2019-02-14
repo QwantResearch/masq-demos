@@ -70,6 +70,7 @@ class App extends Component {
     if (this.masqPopupWindow) {
       // close previous popup if any
       this.masqPopupWindow.close()
+
       this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500')
     } else {
       this.masqPopupWindow = window.open('', 'masq', 'height=700,width=500')
