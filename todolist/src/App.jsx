@@ -78,9 +78,13 @@ class App extends Component {
       this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500')
     }
 
-    await this.masq.logIntoMasq(this.state.stayConnected)
-    this.setState({ logged: true })
-    await this.fetchTasksFromDB()
+    try {
+      await this.masq.logIntoMasq(this.state.stayConnected)
+      this.setState({ logged: true })
+      await this.fetchTasksFromDB()
+    } catch (error) {
+      console.error('The user refused.')
+    }
   }
 
   async handleClickLogout () {
