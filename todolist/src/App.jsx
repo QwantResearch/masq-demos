@@ -68,6 +68,7 @@ class App extends Component {
     if (!link) return
 
     this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500')
+    this.masqPopupWindow.focus()
 
     try {
       await this.masq.logIntoMasq(this.state.stayConnected)
