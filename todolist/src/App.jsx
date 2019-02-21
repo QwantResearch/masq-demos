@@ -7,8 +7,12 @@ import './App.css'
 
 const APP = {
   name: 'Qwant Tasks',
-  description: 'Organize your tasks',
-  imageURL: ''
+  description: 'Organize your tasks but keep them private',
+  imageURL: 'https://sync-beta.qwantresearch.com/tasks/favicon.ico',
+  options: {
+    hubUrls: [ 'wss://masq-ws.qwant.plive/' ],
+    masqAppBaseUrl: 'http://localhost:3000/'
+  }
 }
 
 class App extends Component {
@@ -27,7 +31,7 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    this.masq = new Masq(APP.name, APP.description, APP.imageURL)
+    this.masq = new Masq(APP.name, APP.description, APP.imageURL, APP.options)
 
     if (this.masq.isLoggedIn()) {
       await this.masq.connectToMasq()
