@@ -5,15 +5,28 @@ import Item from './components/Item'
 
 import './App.css'
 
+if (!process.env.REACT_APP_HUB_URLS) {
+  throw new Error('REACT_APP_HUB_URLS environment variable not specified')
+}
+const HUB_URLS = process.env.REACT_APP_HUB_URLS.split(',')
+if (!HUB_URLS || !HUB_URLS[0]) {
+  throw Error('HUB_URLS environment variable not specified')
+}
+if (!process.env.REACT_APP_MASQ_APP_BASE_URL) {
+  throw Error('REACT_APP_MASQ_APP_BASE_URL environment variable not specified')
+}
+const MASQ_APP_BASE_URL = process.env.REACT_APP_MASQ_APP_BASE_URL
+
 const APP = {
   name: 'Qwant Tasks',
   description: 'Organize your tasks but keep them private',
   imageURL: 'https://sync-beta.qwantresearch.com/tasks/favicon.ico',
   options: {
-    hubUrls: [ 'wss://masq-ws.qwant.plive/' ],
-    masqAppBaseUrl: 'http://localhost:3000/'
+    hubUrls: HUB_URLS,
+    masqAppBaseUrl: MASQ_APP_BASE_URL
   }
 }
+
 
 class App extends Component {
   constructor (props) {
