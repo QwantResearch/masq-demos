@@ -27,7 +27,6 @@ const APP = {
   }
 }
 
-
 class App extends Component {
   constructor (props) {
     super(props)
@@ -84,7 +83,7 @@ class App extends Component {
     const { link } = this.state
     if (!link) return
 
-    this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500')
+    this.masqPopupWindow = window.open(link, 'masq', 'height=700,width=500,rel=noopener')
     this.masqPopupWindow.focus()
 
     try {
