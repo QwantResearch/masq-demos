@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Masq from 'masq-lib'
+import * as createMasq from 'masq-lib'
 
 import SearchBar from './components/SearchBar'
 
@@ -48,11 +48,10 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    this.masq = new Masq(APP.name, APP.description, APP.imageURL)
 
     try {
+      this.masq = await createMasq(APP.name, APP.description, APP.imageURL)
       if (this.masq.isLoggedIn()) {
-        await this.masq.connectToMasq()
         this.setState({ loggedIn: true })
         await this.getAllQueriesFromDB()
       } else {
